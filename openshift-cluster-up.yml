@@ -2,14 +2,14 @@
   become: yes
   gather_facts: yes
 
-  pre_tasks:
-    - name: create docker environment file
-      file: path=/etc/default/docker state=touch
-
-    - name: add DOCKER_OPTS
-      lineinfile:
-        path: /etc/default/docker
-        line: 'DOCKER_OPTS='
+#  pre_tasks:
+#    - name: create docker environment file
+#      file: path=/etc/default/docker state=touch
+#
+#    - name: add DOCKER_OPTS
+#      lineinfile:
+#        path: /etc/default/docker
+#        line: 'DOCKER_OPTS='
 
   roles:
     - ansible-role-rhn
@@ -18,15 +18,6 @@
 #      docker_opts: "--insecure-registry 172.30.0.0/16 --insecure-registry local.openshift"
 
   post_tasks:
-    - name: install docker
-      yum:
-        name: docker
-        state: present
-
-    - name: restart docker
-      service:
-        name: docker
-        state: restarted
     - name: install packages
       yum:
         name: "{{ item }}"
@@ -38,6 +29,16 @@
       - openssl-devel
       - git
       ignore_errors: true
+
+    - name: install docker
+      yum:
+        name: docker
+        state: present
+
+    - name: restart docker
+      service:
+        name: docker
+        state: restarted
 
     - name: install more packages
       yum:
