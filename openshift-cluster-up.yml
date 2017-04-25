@@ -5,6 +5,7 @@
     - ansible-role-rhn
     - role: grycap.docker
       docker_start_service: true
+      docker_opts: "--insecure-registry 172.30.0.0/16 --insecure-registry local.openshift"
 
 - hosts: all
   become: yes
