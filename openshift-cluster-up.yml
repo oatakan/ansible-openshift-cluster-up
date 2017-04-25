@@ -13,15 +13,53 @@
 
   roles:
     - ansible-role-rhn
-    - role: grycap.docker
-      docker_start_service: true
-      docker_opts: "--insecure-registry 172.30.0.0/16 --insecure-registry local.openshift"
+#    - role: grycap.docker
+#      docker_start_service: true
+#      docker_opts: "--insecure-registry 172.30.0.0/16 --insecure-registry local.openshift"
 
   post_tasks:
+    - name: install docker
+      yum:
+        name: docker
+        state: present
+
     - name: restart docker
       service:
         name: docker
         state: restarted
+    - name: install packages
+      yum:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+      - https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      - PyYAML
+      - python-devel
+      - openssl-devel
+      - git
+      ignore_errors: true
+
+    - name: install more packages
+      yum:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+      - python-pip
+
+    - name: pip upgrade setuptools and pip
+      pip:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+      - pip
+      - setuptools
+
+    - name: install ansible and ansible-container
+      pip:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+      - ansible
 
 - hosts: all
   become: yes
