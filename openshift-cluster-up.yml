@@ -1,16 +1,23 @@
 - hosts: all
   become: yes
   gather_facts: yes
+
+  pre_tasks:
+    - name: create docker environment file
+      file: path=/etc/default/docker state=touch
+
+    - name: add DOCKER_OPTS
+      lineinfile:
+        path: /etc/default/docker
+        line: 'DOCKER_OPTS='
+
   roles:
     - ansible-role-rhn
     - role: grycap.docker
       docker_start_service: true
       docker_opts: "--insecure-registry 172.30.0.0/16 --insecure-registry local.openshift"
 
-- hosts: all
-  become: yes
-  gather_facts: yes
-  tasks:
+  post_tasks:
     - name: restart docker
       service:
         name: docker
