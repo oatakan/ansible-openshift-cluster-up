@@ -61,12 +61,17 @@
       - pip
       - setuptools
 
-    - name: install ansible and ansible-container
+    - name: install ansible
       pip:
         name: "{{ item }}"
         state: latest
       with_items:
       - ansible
+
+    - name: install ansible-container into virtualenv
+      pip:
+        name: git+https://github.com/oatakan/ansible-container
+        virtualenv: /root/venv
 
 - hosts: all
   become: yes
