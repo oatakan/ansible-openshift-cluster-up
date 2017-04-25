@@ -3,7 +3,7 @@
   gather_facts: yes
   roles:
     - ansible-role-rhn
-    - indigo-dc.docker
+    - grycap.docker
     - role: chouseknecht.cluster-up-role
       openshift_github_user: openshift
       openshift_github_name: origin
