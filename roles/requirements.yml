@@ -3,4 +3,5 @@
 
 - src: grycap.docker
 
-- src: chouseknecht.cluster-up-role
+- src: https://github.com/oatakan/cluster-up-role
+  version: origin/master

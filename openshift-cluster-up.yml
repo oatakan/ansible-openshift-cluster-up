@@ -4,7 +4,7 @@
   roles:
     - ansible-role-rhn
     - grycap.docker
-    - role: chouseknecht.cluster-up-role
+    - role: cluster-up-role
       openshift_github_user: openshift
       openshift_github_name: origin
       openshift_github_url: https://api.github.com/repos
