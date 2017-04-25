@@ -71,7 +71,7 @@
 
     - name: install ansible-container into virtualenv
       pip:
-        name: git+https://github.com/oatakan/ansible-container
+        name: git+https://github.com/oatakan/ansible-container#egg=master
         virtualenv: /root/venv
 
 - hosts: all
