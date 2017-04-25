@@ -2,6 +2,7 @@
   become: yes
   gather_facts: yes
   roles:
+    - ansible-role-rhn
     - indigo-dc.docker
     - chouseknecht.cluster-up-role
       openshift_github_user: openshift
