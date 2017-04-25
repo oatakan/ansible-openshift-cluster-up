@@ -3,7 +3,8 @@
   gather_facts: yes
   roles:
     - ansible-role-rhn
-    - grycap.docker
+    - role: grycap.docker
+      docker_start_service: true
     - role: cluster-up-role
       openshift_github_user: openshift
       openshift_github_name: origin
