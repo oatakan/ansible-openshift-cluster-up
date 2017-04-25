@@ -5,6 +5,20 @@
     - ansible-role-rhn
     - role: grycap.docker
       docker_start_service: true
+
+- hosts: all
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: restart docker
+      service:
+        name: docker
+        state: restarted
+
+- hosts: all
+  become: yes
+  gather_facts: yes
+  roles:
     - role: cluster-up-role
       openshift_github_user: openshift
       openshift_github_name: origin
