@@ -1,0 +1,3 @@
+- src: indigo-dc.docker
+
+- src: chouseknecht.cluster-up-role
